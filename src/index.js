@@ -1,5 +1,6 @@
-import sliderOne from './modules/two'
-import modalScript from './modules/one'
+import timer from './modules/timer'
+import dateNow from './modules/datenow'
 
-sliderOne()
-modalScript()
+
+timer("08 november 2021")
+dateNow()
