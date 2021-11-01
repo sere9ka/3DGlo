@@ -7,21 +7,27 @@ const modal = () => {
         modal.style.display = 'block';
         modal.style.transform = 'translateX(-100%)';
         let count = -100
-        let transform = modal.style.transform
-        const animateModal = () => {
+        const counter = () => {
             count++
-            // console.log(count);
-            transform = `translateX(${count}%)`;
-            modal.style.transform = transform
-            console.log(transform);
+            return {count}
         }
-        modal.style.transform = transform
-        if (transform != 0) {
-            setInterval(animateModal, 100)
+        const animateModal = () => {
+            let getCount = counter()
+            if (getCount.count < 0) {
+                modal.style.transform = `translateX(${getCount.count}%)`;
+            }
+            console.log(getCount.count);
         }
+        let getCount = counter()
+        if (getCount.count !== 0) {
+            setInterval(animateModal, 20)
+        }
+        animateModal()
     }
+
     const modalClose = () => {
         modal.style.display = '';
+        clearInterval(modalOpen)
     }
     modalBtns.forEach(btn => {btn.addEventListener('click', modalOpen)});
     closeBtn.addEventListener('click', modalClose);
