@@ -1,6 +1,8 @@
 import timer from './modules/timer'
-import dateNow from './modules/datenow'
+import menu from './modules/menu'
+import modal from './modules/modal'
 
 
 timer("08 november 2021")
-dateNow()
+menu()
+modal()
