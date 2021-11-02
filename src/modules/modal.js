@@ -45,6 +45,7 @@ const modal = () => {
 
     const modalClose = () => {
         modal.style.display = 'none';
+        finish = false
     }
     modalBtns.forEach(btn => btn.addEventListener('click', windowWidth));
     closeBtn.addEventListener('click', modalClose);
