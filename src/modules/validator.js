@@ -1,5 +1,3 @@
-// ; (()=>{,,n=,r=,l=;,();
-
 const validator = () => {
     const forms = document.querySelectorAll("form[name='user_form']");
     const inputMessage = document.querySelector("input[placeholder='Ваше сообщение']");
