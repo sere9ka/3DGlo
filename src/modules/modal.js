@@ -1,7 +1,8 @@
 const modal = () => {
     const modal = document.querySelector('.popup');
     const closeBtn = modal.querySelector('.popup-close');
-    const modalBtns = document.querySelectorAll('.popup-btn') 
+    const modalBtns = document.querySelectorAll('.popup-btn')
+    const tabs = document.querySelector('.service');
     let intervalId;
     let finish = false;
 
@@ -47,8 +48,17 @@ const modal = () => {
         modal.style.display = 'none';
         finish = false
     }
-    modalBtns.forEach(btn => btn.addEventListener('click', windowWidth));
-    closeBtn.addEventListener('click', modalClose);
+    // modalBtns.forEach(btn => btn.addEventListener('click', windowWidth));
+    tabs.addEventListener('click', (e) => {
+        if (e.target.closest('.popup-btn')) {
+            windowWidth()
+        }
+    })
+    modal.addEventListener('click', (e) => {
+        if (!e.target.closest('.popup-content') || e.target.classList.contains('popup-close')) {
+            modalClose()
+        }
+    });
 
 }
 
