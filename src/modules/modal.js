@@ -6,8 +6,6 @@ const modal = () => {
     let intervalId;
     let finish = false;
 
-    console.log(tabs);
-
     const modalOpenAnim = () => {
         modal.style.display = 'block';
         modal.style.transform = 'translateX(-100%)';
