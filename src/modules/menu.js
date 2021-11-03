@@ -7,7 +7,6 @@ const menu = () => {
         menu.classList.toggle('active-menu')
     }
 
-
     body.addEventListener('click', (e) => {
         if (e.target.closest('.menu')|| e.target === closeBtn) {
             menuOpen()
