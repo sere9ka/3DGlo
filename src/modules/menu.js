@@ -11,15 +11,14 @@ const menu = () => {
     body.addEventListener('click', (e) => {
         if (e.target.closest('.menu')|| e.target === closeBtn) {
             menuOpen()
-        }
-    })
-
-    menu.addEventListener('click', (e) => {
-        if (e.target.matches('a')) {
+        } else if (e.target.closest('menu')) {
+            if (e.target.matches('a')) {
+                menuOpen()
+            }
+        } else if (menu.classList.contains('active-menu')) {
             menuOpen()
         }
     })
-
 }
 
 export default menu
