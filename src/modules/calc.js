@@ -5,6 +5,7 @@ const calc = (price = 100) => {
     const calcCount = document.querySelector('.calc-count');
     const calcDay = document.querySelector('.calc-day');
     const total = document.getElementById('total');
+    
 
     const countCalc = () => {
         const calcTypeValue = +calcType.options[calcType.selectedIndex].value;
@@ -27,8 +28,9 @@ const calc = (price = 100) => {
         if (calcType.value && calcSquare.value) {
             totalValue = Math.round(price * calcTypeValue * calcSquareValue * calcCountValue * calcDayValue)
         } else totalValue = 0
-        
+
         total.textContent = totalValue
+        
     }
     calcBlock.addEventListener('input', (e) => {
         if (e.target === calcType || e.target === calcSquare || e.target === calcCount || e.target === calcDay) {
