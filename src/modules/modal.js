@@ -16,6 +16,7 @@ const modal = () => {
         }
         const animateModal = () => {
             let getCount = counter()
+            console.log(getCount.count);
             if (getCount.count <= 0) {
                 modal.style.transform = `translateX(${getCount.count}%)`;
             } else {
