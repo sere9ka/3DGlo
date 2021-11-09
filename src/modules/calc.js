@@ -33,6 +33,7 @@ const calc = (price = 100) => {
         let totalValue = 0;
         let calcCountValue = 1;
         let calcDayValue = 1;
+        let animSpeed = 0.5;
 
         let calcCounter = 0
 
@@ -51,7 +52,16 @@ const calc = (price = 100) => {
         } else totalValue = 0
         
         const counterCalc = () => {
-            calcCounter += 5;
+            if (totalValue < 1000) {
+                calcCounter += 5
+            } else if (totalValue >= 1000 && totalValue < 5000) {
+                calcCounter += 10
+            } else if (totalValue >= 5000 && totalValue < 10000) {
+                calcCounter += 20
+            } else if (totalValue > 10000) {
+                calcCounter += 50
+            }
+            
             if (calcCounter <= totalValue) {
                 return {calcCounter}
             } else return totalValue
@@ -60,7 +70,6 @@ const calc = (price = 100) => {
         const animateCalc = () => {
             let getCount = counterCalc() 
             if (getCount.calcCounter <= totalValue) {
-                console.log(getCount.calcCounter);
                 total.textContent = getCount.calcCounter
             } else {
                 finish = true;
@@ -68,9 +77,14 @@ const calc = (price = 100) => {
                 clearInterval(intervalCalc)
             }
         }
+        if (totalValue >= 1000 && totalValue < 5000) {
+            animSpeed = 0.3
+        } else if (totalValue >= 5000 && totalValue < 10000) {
+            animSpeed = 0.1
+        }
         
         if (!finish) {
-            intervalCalc = setInterval(animateCalc, 1)
+            intervalCalc = setInterval(animateCalc, animSpeed)
         } else {
             clearInterval(intervalCalc)
         }
@@ -81,6 +95,7 @@ const calc = (price = 100) => {
 
     calcBlock.addEventListener('input', (e) => {
         if (e.target === calcType || e.target === calcSquare || e.target === calcCount || e.target === calcDay) {
+            clearInterval(intervalCalc)
             getCountCalc()
         }
     })
