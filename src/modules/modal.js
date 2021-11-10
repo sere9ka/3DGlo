@@ -1,3 +1,5 @@
+import { animate } from "./helpers";
+
 const modal = () => {
     const modal = document.querySelector('.popup');
     const closeBtn = modal.querySelector('.popup-close');
@@ -10,26 +12,16 @@ const modal = () => {
         modal.style.display = 'block';
         modal.style.transform = 'translateX(-100%)';
         let count = -100
-        const counter = () => {
-            count += 2;
-            return {count}
-        }
-        const animateModal = () => {
-            let getCount = counter()
-            console.log(getCount.count);
-            if (getCount.count <= 0) {
-                modal.style.transform = `translateX(${getCount.count}%)`;
-            } else {
-                finish = true;
-                clearInterval(intervalId)
+
+        animate({
+            duration: 500,
+            timing(timeFraction) {
+              return timeFraction;
+            },
+            draw(progress) {
+              modal.style.transform = `translateX(${count + progress*100}%)`;
             }
-        }
-        
-        if (!finish) {
-            intervalId = setInterval(animateModal, 10)
-        } else {
-            clearInterval(intervalId)
-        }
+          });
     }
 
     const modalOpen = () => {
@@ -49,7 +41,6 @@ const modal = () => {
         modal.style.display = 'none';
         finish = false
     }
-    // modalBtns.forEach(btn => btn.addEventListener('click', windowWidth));
     tabs.addEventListener('click', (e) => {
         if (e.target.closest('.popup-btn')) {
             windowWidth()
