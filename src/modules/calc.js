@@ -1,3 +1,5 @@
+import { animate } from "./helpers";
+
 const calc = (price = 100) => {
     const calcBlock = document.querySelector('.calc-block');
     const calcType = document.querySelector('.calc-type');
@@ -51,43 +53,16 @@ const calc = (price = 100) => {
             totalValue = Math.round(price * calcTypeValue * calcSquareValue * calcCountValue * calcDayValue)
         } else totalValue = 0
         
-        const counterCalc = () => {
-            if (totalValue < 1000) {
-                calcCounter += 5
-            } else if (totalValue >= 1000 && totalValue < 5000) {
-                calcCounter += 10
-            } else if (totalValue >= 5000 && totalValue < 10000) {
-                calcCounter += 20
-            } else if (totalValue > 10000) {
-                calcCounter += 50
+        animate({
+            duration: 1000,
+            timing(timeFraction) {
+              return timeFraction;
+            },
+            draw(progress) {
+                total.textContent = Math.round(progress * totalValue)
             }
-            
-            if (calcCounter <= totalValue) {
-                return {calcCounter}
-            } else return totalValue
-            
-        }
-        const animateCalc = () => {
-            let getCount = counterCalc() 
-            if (getCount.calcCounter <= totalValue) {
-                total.textContent = getCount.calcCounter
-            } else {
-                finish = true;
-                total.textContent = totalValue
-                clearInterval(intervalCalc)
-            }
-        }
-        if (totalValue >= 1000 && totalValue < 5000) {
-            animSpeed = 0.3
-        } else if (totalValue >= 5000 && totalValue < 10000) {
-            animSpeed = 0.1
-        }
-        
-        if (!finish) {
-            intervalCalc = setInterval(animateCalc, animSpeed)
-        } else {
-            clearInterval(intervalCalc)
-        }
+          })
+
     }
     const getCountCalc = debounce(() => {
         countCalc()
