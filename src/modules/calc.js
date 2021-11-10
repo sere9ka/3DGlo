@@ -35,9 +35,6 @@ const calc = (price = 100) => {
         let totalValue = 0;
         let calcCountValue = 1;
         let calcDayValue = 1;
-        let animSpeed = 0.5;
-
-        let calcCounter = 0
 
         if (calcCount.value > 1) {
             calcCountValue += calcCount.value / 10
