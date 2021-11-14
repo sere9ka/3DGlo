@@ -1,11 +1,9 @@
 const sendForm = ({formId, someElem = []}) => {
     const form = document.getElementById(formId)
-
-    const statusBlock = document.createElement('div');
-
+    const statusBlock = form.querySelector('.status');
+    console.log(statusBlock);
     const loadText = 'Загрузка...'
-    const errorText = 'Ошибка'
-    const successText = 'Спасибо! Наш менеджер свяжется с Вами!'
+    const successText = 'Спасибо! Наш менеджер свяжется с Вами!'    
 
     const validate = (list) => {
         let success = true
@@ -13,8 +11,7 @@ const sendForm = ({formId, someElem = []}) => {
         return success
     }
     const removeStatus = () => {
-        form.removeChild(statusBlock)
-        console.log(form);
+        statusBlock.style.display = 'none'
     }
 
     const sendData = (data) => {
@@ -33,9 +30,11 @@ const sendForm = ({formId, someElem = []}) => {
         const formData = new FormData(form)
         const formBody = {}
 
-        statusBlock.classList.add('status')
+        if (formId === 'form3') {
+            statusBlock.style.color = '#19b5fe'
+        }
         statusBlock.textContent = loadText
-        form.append(statusBlock)
+        statusBlock.style.display = 'block'
         
         formData.forEach((value, key) => {
             formBody[key] = value
@@ -55,21 +54,17 @@ const sendForm = ({formId, someElem = []}) => {
             sendData(formBody)
                 .then(data => {
                     statusBlock.textContent = successText
-                    if (formId === 'form3') {
-                        statusBlock.style.color = '#19b5fe'
-                    }
-                    form.append(statusBlock)
-                    console.log(form);
-                    setTimeout(removeStatus, 5000)
+                    setTimeout(removeStatus, 8000)
                     formElements.forEach(input => {
                         input.value = ''
                     })
                 })
                 .catch(error => {
-                    statusBlock.textContent = errorText
+                    if (error.message === 'Failed to fetch') {
+                        error.message = 'Данные не отправились, ошибка подключения'
+                    }
+                    statusBlock.textContent = error.message
                 })
-        } else {
-            form.append(statusBlock)
         }
     }
 
@@ -79,7 +74,9 @@ const sendForm = ({formId, someElem = []}) => {
         }
         form.addEventListener('submit', (e) => {
             e.preventDefault();
-            submitForm()        
+            statusBlock.style.display = 'none'
+            submitForm()   
+            setTimeout(removeStatus, 8000)     
         })
     } catch(error) {
         console.log(error.message);

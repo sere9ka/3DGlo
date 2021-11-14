@@ -18,6 +18,9 @@ slider()
 
 const forms = document.querySelectorAll('form')
 forms.forEach((form, id) => {
+    const statusBlock = document.createElement('div');
+    statusBlock.classList.add('status')
+    form.append(statusBlock)
     form.querySelector('button').addEventListener('click', async () => {
         sendForm({ 
             formId: `form${id+1}`,
