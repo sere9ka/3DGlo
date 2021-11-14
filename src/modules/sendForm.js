@@ -13,7 +13,7 @@ const sendForm = ({formId, someElem = []}) => {
         return success
     }
     const removeStatus = () => {
-        statusBlock.remove()
+        form.removeChild(statusBlock)
         console.log(form);
     }
 
@@ -58,8 +58,8 @@ const sendForm = ({formId, someElem = []}) => {
                     if (formId === 'form3') {
                         statusBlock.style.color = '#19b5fe'
                     }
-                    console.dir(statusBlock);
                     form.append(statusBlock)
+                    console.log(form);
                     setTimeout(removeStatus, 5000)
                     formElements.forEach(input => {
                         input.value = ''
