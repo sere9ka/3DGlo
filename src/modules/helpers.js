@@ -19,4 +19,15 @@ function animate({timing, draw, duration}) {
     });
   }
 
-export { animate }
+function getFormId(e) {
+  const forms = document.querySelectorAll('form')
+
+  forms.forEach(form => {
+    if (e.id === form.id) {
+      let formId = form.id
+      return formId
+    }
+  })
+}
+
+export { animate, getFormId }

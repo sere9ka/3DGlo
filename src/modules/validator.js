@@ -4,7 +4,7 @@ const validator = () => {
 
     const textRules = /([^а-яА-Я-\s]+)/;
     const emailRules = /([^a-zA-Z-\@\_\.\!\~\*\'\s]+)/;
-    const phoneRules = /([^0-9\(\)\-])/;
+    const phoneRules = /([^0-9\(\)\-\+])/;
 
     inputMessage.addEventListener("input",(e=>{e.target.value=e.target.value.replace(textRules,"")}))
 
