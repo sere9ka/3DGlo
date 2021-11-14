@@ -2,7 +2,8 @@ const menu = () => {
     const menu = document.querySelector('menu');
     const closeBtn = document.querySelector('.close-btn');
     const body = document.querySelector('body');
-    const aService = document.querySelector('main > a')
+    const aService = document.querySelector('main a');
+
 
     const menuOpen = () => {
         menu.classList.toggle('active-menu')
@@ -24,7 +25,7 @@ const menu = () => {
             e.preventDefault();
             document.querySelector(e.target.hash).scrollIntoView();
             menuOpen()
-        } else if (aService) {
+        } else if (e.target.closest('main a')) {
             e.preventDefault();
             document.querySelector(aService.hash).scrollIntoView();
         }

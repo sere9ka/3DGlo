@@ -1,7 +1,6 @@
 const sendForm = ({formId, someElem = []}) => {
     const form = document.getElementById(formId)
     const statusBlock = form.querySelector('.status');
-    console.log(statusBlock);
     const loadText = 'Загрузка...'
     const successText = 'Спасибо! Наш менеджер свяжется с Вами!'    
 
@@ -79,7 +78,7 @@ const sendForm = ({formId, someElem = []}) => {
             setTimeout(removeStatus, 8000)     
         })
     } catch(error) {
-        console.log(error.message);
+        
     }
 }
 
