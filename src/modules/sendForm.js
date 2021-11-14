@@ -12,6 +12,10 @@ const sendForm = ({formId, someElem = []}) => {
 
         return success
     }
+    const removeStatus = () => {
+        statusBlock.remove()
+        console.log(form);
+    }
 
     const sendData = (data) => {
         return fetch('https://jsonplaceholder.typicode.com/posts', {
@@ -29,9 +33,10 @@ const sendForm = ({formId, someElem = []}) => {
         const formData = new FormData(form)
         const formBody = {}
 
+        statusBlock.classList.add('status')
         statusBlock.textContent = loadText
         form.append(statusBlock)
-
+        
         formData.forEach((value, key) => {
             formBody[key] = value
         })
@@ -50,7 +55,9 @@ const sendForm = ({formId, someElem = []}) => {
             sendData(formBody)
                 .then(data => {
                     statusBlock.textContent = successText
+                    console.log(statusBlock);
                     form.append(statusBlock)
+                    setTimeout(removeStatus, 5000)
                     formElements.forEach(input => {
                         input.value = ''
                     })
