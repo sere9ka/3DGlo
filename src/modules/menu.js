@@ -12,6 +12,8 @@ const menu = () => {
             menuOpen()
         } else if (e.target.closest('menu')) {
             if (e.target.matches('a')) {
+                e.preventDefault();
+                document.querySelector(e.target.hash).scrollIntoView();
                 menuOpen()
             }
         } else if (menu.classList.contains('active-menu')) {

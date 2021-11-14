@@ -55,7 +55,10 @@ const sendForm = ({formId, someElem = []}) => {
             sendData(formBody)
                 .then(data => {
                     statusBlock.textContent = successText
-                    console.log(statusBlock);
+                    if (formId === 'form3') {
+                        statusBlock.style.color = '#19b5fe'
+                    }
+                    console.dir(statusBlock);
                     form.append(statusBlock)
                     setTimeout(removeStatus, 5000)
                     formElements.forEach(input => {
