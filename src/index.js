@@ -21,7 +21,8 @@ forms.forEach((form, id) => {
     const statusBlock = document.createElement('div');
     statusBlock.classList.add('status')
     form.append(statusBlock)
-    form.querySelector('button').addEventListener('click', async () => {
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
         sendForm({ 
             formId: `form${id+1}`,
             someElem: [

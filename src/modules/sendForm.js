@@ -5,7 +5,17 @@ const sendForm = ({formId, someElem = []}) => {
     const successText = 'Спасибо! Наш менеджер свяжется с Вами!'    
 
     const validate = (list) => {
-        let success = true
+        let success;
+        const inputEmail = form.querySelector('[name="user_email"]')
+        const inputPhone = form.querySelector('[name="user_phone"]')
+
+        if (inputEmail.value === '') {
+            statusBlock.textContent = 'Введите e-mail!'
+        } else if (inputPhone.value.length < 11 || inputPhone.value.length > 16) {
+            statusBlock.textContent = 'Введите правильный номер из 11 цифр! Формат ввода: 8(000)000-00-00'
+        } else {
+            success = true
+        }
 
         return success
     }
@@ -71,12 +81,8 @@ const sendForm = ({formId, someElem = []}) => {
         if (!form) {
             throw new Error('Верните форму на место! =)')
         }
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            statusBlock.style.display = 'none'
-            submitForm()   
-            setTimeout(removeStatus, 8000)     
-        })
+        submitForm()   
+        setTimeout(removeStatus, 8000) 
     } catch(error) {
         
     }
