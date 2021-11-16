@@ -1,9 +1,11 @@
-const slider = () => {
+const slider = ({sliderBlock, slides, dotsBlock, arrowLeft, arrowRight, slideActive, dotActive}) => {
     // 
+    if (sliderBlock === null) {
+        return;
+    } else if (slides.length === 0) {
+        return;
+    }
 
-    const sliderBlock = document.querySelector('.portfolio-content');
-    const slides = document.querySelectorAll('.portfolio-item');
-    const dotsBlock = document.querySelector('.portfolio-dots');
     const timeInterval = 2000;
     let currentSlide = 0;
     let dots = 0;
@@ -15,7 +17,7 @@ const slider = () => {
             const newDot = document.createElement('li');
             newDot.classList.add('dot');
             if (dots.length < 1) {
-                newDot.classList.add('dot-active');
+                newDot.classList.add(dotActive);
             }
             dotsBlock.append(newDot);
             getDots()
@@ -31,14 +33,14 @@ const slider = () => {
 
     const autoSlide = () => {
         prevSlide(slides, currentSlide, 'portfolio-item-active')
-        prevSlide(dots, currentSlide, 'dot-active')
+        prevSlide(dots, currentSlide, dotActive)
         currentSlide++
 
         if (currentSlide >= slides.length) {
             currentSlide = 0
         }
         nextSlide(slides, currentSlide, 'portfolio-item-active')
-        nextSlide(dots, currentSlide, 'dot-active')
+        nextSlide(dots, currentSlide, dotActive)
     };
     const startSlide = (timer = 1500) => {
         getDots()
@@ -56,10 +58,10 @@ const slider = () => {
         }
 
         prevSlide(slides, currentSlide, 'portfolio-item-active')
-        prevSlide(dots, currentSlide, 'dot-active')
-        if (e.target.matches('#arrow-right')) {
+        prevSlide(dots, currentSlide, dotActive)
+        if (e.target.matches(arrowRight)) {
             currentSlide++;
-        } else if (e.target.matches('#arrow-left')) {
+        } else if (e.target.matches(arrowLeft)) {
             currentSlide--;
         } else if (e.target.matches('.dot')) {
             dots.forEach((dot, index) => {
@@ -75,7 +77,7 @@ const slider = () => {
             currentSlide = slides.length - 1
         }
         nextSlide(slides, currentSlide, 'portfolio-item-active')
-        nextSlide(dots, currentSlide, 'dot-active')
+        nextSlide(dots, currentSlide, dotActive)
     })
 
     sliderBlock.addEventListener('mouseenter', (e) => {
