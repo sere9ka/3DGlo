@@ -1,7 +1,7 @@
 const sendForm = ({formId, someElem = []}) => {
     const form = document.getElementById(formId)
     const statusBlock = form.querySelector('.status');
-    const loadText = 'Загрузка...'
+    const textLoad = 'Загрузка...'
     const successText = 'Спасибо! Наш менеджер свяжется с Вами!'    
 
     const validate = (list) => {
@@ -20,6 +20,7 @@ const sendForm = ({formId, someElem = []}) => {
         return success
     }
     const removeStatus = () => {
+        statusBlock.textContent = ''
         statusBlock.style.display = 'none'
     }
 
@@ -42,8 +43,15 @@ const sendForm = ({formId, someElem = []}) => {
         if (formId === 'form3') {
             statusBlock.style.color = '#19b5fe'
         }
-        statusBlock.textContent = loadText
         statusBlock.style.display = 'block'
+        statusBlock.textContent = textLoad
+        // statusBlock.innerHTML = '<div class="sk-wave">' + 
+        //                             '<div class="sk-rect sk-rect-1"></div>' + 
+        //                             '<div class="sk-rect sk-rect-2"></div>' + 
+        //                             '<div class="sk-rect sk-rect-3"></div>' + 
+        //                             '<div class="sk-rect sk-rect-4"></div>' + 
+        //                             '<div class="sk-rect sk-rect-5"></div>' + 
+        //                         '</div>'
         
         formData.forEach((value, key) => {
             formBody[key] = value
@@ -62,6 +70,10 @@ const sendForm = ({formId, someElem = []}) => {
         if (validate(formElements)) {
             sendData(formBody)
                 .then(data => {
+                    removeStatus()
+                    statusBlock.style.display = 'block'
+                    statusBlock.style.width = ''
+                    statusBlock.style.height = ''
                     statusBlock.textContent = successText
                     setTimeout(removeStatus, 8000)
                     formElements.forEach(input => {
@@ -82,7 +94,7 @@ const sendForm = ({formId, someElem = []}) => {
             throw new Error('Верните форму на место! =)')
         }
         submitForm()   
-        setTimeout(removeStatus, 8000) 
+        setTimeout(removeStatus, 5000) 
     } catch(error) {
         
     }
