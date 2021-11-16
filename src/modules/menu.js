@@ -17,17 +17,26 @@ const menu = () => {
             menuOpen()
         } else if (e.target.closest('menu')) {
             e.preventDefault();
-            document.querySelector(e.target.hash).scrollIntoView();
+            document.querySelector(e.target.hash).scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
             if (e.target.matches('a')) {
                 menuOpen()
             }
         } else if (menu.classList.contains('active-menu')) {
             e.preventDefault();
-            document.querySelector(e.target.hash).scrollIntoView();
+            document.querySelector(e.target.hash).scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
             menuOpen()
         } else if (e.target.closest('main a')) {
             e.preventDefault();
-            document.querySelector(aService.hash).scrollIntoView();
+            document.querySelector(aService.hash).scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
         }
     })
 }
