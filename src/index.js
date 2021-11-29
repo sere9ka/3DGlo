@@ -8,7 +8,7 @@ import slider from './modules/slider'
 import sendForm from './modules/sendForm'
 
 
-timer("02 december 2021")
+timer("05 December 2021")
 menu()
 modal()
 calc(100)
@@ -23,15 +23,15 @@ forms.forEach((form, id) => {
     form.append(statusBlock)
     form.addEventListener('submit', (e) => {
         e.preventDefault();
-        sendForm({ 
-            formId: `form${id+1}`,
+        sendForm({
+            formId: `form${id + 1}`,
             someElem: [
                 {
                     type: 'block',
                     id: 'total'
                 }
             ]
-         })
+        })
     })
 })
 
